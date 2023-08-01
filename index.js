@@ -11,9 +11,9 @@ commandLine
   .option('-p, --phone <type>', 'user phone');
 
 commandLine.parse(process.argv);
-const argv = commandLine.opts();
+const commandLineArgs = commandLine.opts();
 
-invokeAction(argv);
+invokeAction(commandLineArgs);
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
