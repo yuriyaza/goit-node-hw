@@ -1,5 +1,9 @@
-const app = require('./app')
+const app = require('./app');
+const colors = require('colors');
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
-})
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(colors.bgGreen('\nServer running...'));
+  console.log(`Use API on port: ${port}`);
+});
