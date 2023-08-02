@@ -11,4 +11,4 @@ node index.js --action="add" --name Mango --email mango@gmail.com --phone 322-22
 node index.js --action="remove" --id qdggE76Jtbfd9eWJHrssH
 
 #### Змінюємо контакт та виводимо в консоль об'єкт зміненого контакту або null, якщо контакту з таким id не існує
-node index.js --action="change" --id AeHIrLTr6JkxGE6SN-0Rw --name George --email george@gmail.com --phone 123-00-00
+node index.js --action="update" --id AeHIrLTr6JkxGE6SN-0Rw --name George --email george@gmail.com --phone 123-00-00

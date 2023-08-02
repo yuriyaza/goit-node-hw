@@ -15,10 +15,10 @@ async function listContacts() {
   }
 }
 
-async function getContactById(contactId) {
+async function getContactById(id) {
   try {
     const contacts = await listContacts();
-    const foundContact = contacts.find(element => element.id === contactId);
+    const foundContact = contacts.find(element => element.id === id);
     return foundContact || null;
   }
   catch (error) {
@@ -35,8 +35,8 @@ async function addContact(name, email, phone) {
       email: email || '',
       phone: phone || '',
     };
-    const updatedContacts = [...contacts, newContact];
-    await fs.writeFile(contactsPath, JSON.stringify(updatedContacts, null, 2));
+    const addedContacts = [...contacts, newContact];
+    await fs.writeFile(contactsPath, JSON.stringify(addedContacts, null, 2));
     return newContact;
   }
   catch (error) {
@@ -44,10 +44,10 @@ async function addContact(name, email, phone) {
   }
 }
 
-async function removeContact(contactId) {
+async function removeContact(id) {
   try {
     const contacts = await listContacts();
-    const index = contacts.findIndex(element => element.id === contactId);
+    const index = contacts.findIndex(element => element.id === id);
     if (index === -1) {
       return null
     };
@@ -60,22 +60,22 @@ async function removeContact(contactId) {
   }
 }
 
-async function changeContact(id, name, email, phone) {
+async function updateContact(id, name, email, phone) {
   try {
     const contacts = await listContacts();
     const index = contacts.findIndex(element => element.id === id);
     if (index === -1) {
       return null
     };
-    const changedContact = {
+    const updatedContact = {
       id: contacts[index].id,
       name: name || contacts[index].name,
       email: email || contacts[index].email,
       phone: phone || contacts[index].phone,
     };
-    contacts[index] = changedContact;
+    contacts[index] = updatedContact;
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    return changedContact;
+    return updatedContact;
   }
   catch (error) {
     console.log(error.message);
@@ -87,5 +87,5 @@ module.exports = {
   getContactById,
   addContact,
   removeContact,
-  changeContact,
+  updateContact,
 };

@@ -33,8 +33,8 @@ async function invokeAction({ action, id, name, email, phone }) {
       console.log(await contacts.removeContact(id));
       break;
 
-    case 'change':
-      console.log(await contacts.changeContact(id, name, email, phone));
+    case 'update':
+      console.log(await contacts.updateContact(id, name, email, phone));
       break;
 
     default:
