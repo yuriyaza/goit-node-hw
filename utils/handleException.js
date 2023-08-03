@@ -6,7 +6,7 @@ function handleException(controller) {
     catch (error) {
       response.status(500).json({ message: 'Server error' });
     }
-  }
+  };
 }
 
 module.exports = handleException;
