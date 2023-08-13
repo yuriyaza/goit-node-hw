@@ -1,14 +1,14 @@
-const externalData = require('../models/contactsData');
 const handleException = require('../utils/handleException');
+const Contacts = require('../models/contactsDBModel.js');
 
-async function getAllContacts(request, response, next) {
-  const result = await externalData.listContacts();
+async function getContacts(request, response, next) {
+  const result = await Contacts.find();
   response.json(result);
 }
 
 async function getOneContact(request, response, next) {
   const { contactID } = request.params;
-  const result = await externalData.getContactById(contactID);
+  const result = await Contacts.findOne({ _id: contactID });
   if (!result) {
     response.status(404).json({ message: 'Not found' });
     return;
@@ -17,14 +17,14 @@ async function getOneContact(request, response, next) {
 }
 
 async function postContact(request, response, next) {
-  const result = await externalData.addContact(request.body);
+  const result = await Contacts.create(request.body);
   response.status(201).json(result);
 }
 
 async function putContact(request, response, next) {
   const { contactID } = request.params;
   const contactData = request.body;
-  const result = await externalData.updateContact(contactID, contactData);
+  const result = await Contacts.findByIdAndUpdate(contactID, contactData, { new: true });
   if (!result) {
     response.status(404).json({ message: 'Not found' });
     return;
@@ -34,7 +34,7 @@ async function putContact(request, response, next) {
 
 async function deleteContact(request, response, next) {
   const { contactID } = request.params;
-  const result = await externalData.removeContact(contactID);
+  const result = await Contacts.findByIdAndDelete(contactID);
   if (!result) {
     response.status(404).json({ message: 'Not found' });
     return;
@@ -43,7 +43,7 @@ async function deleteContact(request, response, next) {
 }
 
 module.exports = {
-  getAllContacts: handleException(getAllContacts),
+  getContacts: handleException(getContacts),
   getOneContact: handleException(getOneContact),
   postContact: handleException(postContact),
   putContact: handleException(putContact),

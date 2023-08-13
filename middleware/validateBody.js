@@ -20,6 +20,4 @@ const schema = Joi.object({
   phone: Joi.string().required(),
 });
 
-module.exports = {
-  validateBody,
-};
+module.exports = validateBody;

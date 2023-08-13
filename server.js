@@ -8,11 +8,13 @@ mongoose.set('strictQuery', true);
 mongoose
   .connect(DB_HOST)
   .then(() => {
-    app.listen(PORT);
-    console.log(colors.bgGreen('\nServer running...'));
-    console.log(`Use API on port: ${PORT}`);
+    console.log('\nDatabase connection successful');
+
+    app.listen(PORT, () => {
+      console.log(colors.bgGreen('Server running...\n'));
+    });
   })
   .catch(error => {
-    console.log(error.message);
+    console.log(colors.bgRed(error.message));
     process.exit(1);
   });
