@@ -32,6 +32,17 @@ async function putContact(request, response, next) {
   response.json(result);
 }
 
+async function patchContact(request, response, next) {
+  const { contactID } = request.params;
+  const contactData = request.body;
+  const result = await Contacts.findByIdAndUpdate(contactID, contactData, { new: true });
+  if (!result) {
+    response.status(404).json({ message: 'Not found' });
+    return;
+  }
+  response.json(result);
+}
+
 async function deleteContact(request, response, next) {
   const { contactID } = request.params;
   const result = await Contacts.findByIdAndDelete(contactID);
@@ -47,5 +58,6 @@ module.exports = {
   getOneContact: handleException(getOneContact),
   postContact: handleException(postContact),
   putContact: handleException(putContact),
+  patchContact: handleException(patchContact),
   deleteContact: handleException(deleteContact),
 };
