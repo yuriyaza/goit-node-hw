@@ -1,5 +1,5 @@
 const handleException = require('../utils/handleException');
-const Contacts = require('../models/contactsDBModel.js');
+const {Contacts} = require('../models/contactsDataModel');
 
 async function getContacts(request, response, next) {
   const result = await Contacts.find();
