@@ -17,7 +17,7 @@ app.use(logger(formatsLogger));
 app.use('/api/contacts', contactsRouter);
 
 app.use((request, response) => {
-  response.status(404).json({ message: 'Not found' });
+  response.status(404).json({ status: 404, message: 'Not found' });
 });
 
 module.exports = app;

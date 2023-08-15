@@ -4,7 +4,7 @@ function handleException(controller) {
       await controller(request, response, next);
     }
     catch (error) {
-      response.status(500).json({ message: 'Server error' });
+      response.status(500).json({ status: 500, message: 'Server error' });
     }
   };
 }

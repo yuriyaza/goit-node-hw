@@ -7,11 +7,11 @@ async function getOneContact(request, response, next) {
   const result = await Contacts.findById(id);
 
   if (!result) {
-    response.status(404).json({ message: 'Not found' });
+    response.status(404).json({ status: 404, message: 'Not found' });
     return;
   }
 
-  response.status(200).json({ code: 200, data: result });
+  response.status(200).json({ status: 200, data: result });
 }
 
 module.exports = handleException(getOneContact);
