@@ -11,7 +11,7 @@ mongoose
     console.log('\nDatabase connection successful');
 
     app.listen(PORT, () => {
-      console.log(colors.bgGreen('Server running...\n'));
+      console.log(colors.bgGreen(`Server is running on port ${PORT}\n`));
     });
   })
   .catch(error => {
