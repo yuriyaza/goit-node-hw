@@ -12,7 +12,7 @@ async function putContact(request, response, next) {
     return;
   }
 
-  response.status(200).son({ status: 200, data: result });
+  response.status(200).json({ status: 200, data: result });
 }
 
 module.exports = handleException(putContact);
