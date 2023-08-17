@@ -1,20 +1,31 @@
-const app = require('./app');
 const mongoose = require('mongoose');
+const app = require('./app');
 const colors = require('colors');
 
+require('dotenv').config();
 const { DB_HOST, PORT } = process.env;
 
-mongoose.set('strictQuery', true);
-mongoose
-  .connect(DB_HOST)
-  .then(() => {
-    console.log('\nDatabase connection successful');
-
-    app.listen(PORT, () => {
-      console.log(colors.bgGreen(`Server is running on port ${PORT}\n`));
-    });
-  })
-  .catch(error => {
-    console.log(colors.bgRed(error.message));
+async function databaseConnect() {
+  try {
+    mongoose.set('strictQuery', true);
+    const database = await mongoose.connect(DB_HOST);
+    console.log(`\nDatabase connection successful: ${database.connection.name}`);
+  }
+  catch (error) {
+    console.log(colors.bgRed(`\nDatabase connection error, ${error.message}`));
     process.exit(1);
-  });
+  }
+}
+
+async function serverConnect() {
+  await databaseConnect();
+  app
+    .listen(PORT, () => {
+      console.log(colors.bgGreen(`Server is running on port: ${PORT}`));
+    })
+    .on('error', error => {
+      console.log(colors.bgRed(`Server connection error, ${error.message}`));
+    });
+}
+
+serverConnect();

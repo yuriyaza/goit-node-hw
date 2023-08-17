@@ -1,5 +1,5 @@
-const handleException = require('../utils/handleException');
+const exceptionHandler = require('./exceptionHandler');
 
 module.exports = {
-  handleException,
-}
+  exceptionHandler,
+};
