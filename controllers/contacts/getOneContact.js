@@ -1,5 +1,5 @@
 const { Contacts } = require('../../models/contacts');
-const { handleException } = require('../../utils');
+const { exceptionHandler } = require('../../utils');
 
 async function getOneContact(request, response, next) {
   const { id } = request.params;
@@ -14,4 +14,4 @@ async function getOneContact(request, response, next) {
   response.status(200).json({ status: 200, data: result });
 }
 
-module.exports = handleException(getOneContact);
+module.exports = exceptionHandler(getOneContact);

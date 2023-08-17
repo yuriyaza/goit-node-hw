@@ -1,5 +1,5 @@
 const { Contacts } = require('../../models/contacts');
-const { handleException } = require('../../utils');
+const { exceptionHandler } = require('../../utils');
 
 async function postContact(request, response, next) {
   const body = request.body;
@@ -9,4 +9,4 @@ async function postContact(request, response, next) {
   response.status(201).json({ status: 201, data: result });
 }
 
-module.exports = handleException(postContact);
+module.exports = exceptionHandler(postContact);

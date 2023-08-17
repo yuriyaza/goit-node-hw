@@ -8,7 +8,7 @@ const ctrl = require('../../../controllers/contacts');
 contactsRouter.get('/', ctrl.getContacts);
 contactsRouter.get('/:id', mdwr.validateID, ctrl.getOneContact);
 contactsRouter.post('/', mdwr.validateBody, ctrl.postContact);
-contactsRouter.put('/:id', mdwr.validateID,  ctrl.putContact);
+contactsRouter.put('/:id', mdwr.validateID, mdwr.validateBody, ctrl.putContact);
 contactsRouter.patch('/:id/favorite', mdwr.validateID, mdwr.validateFavorite, ctrl.patchContact);
 contactsRouter.delete('/:id', mdwr.validateID, ctrl.deleteContact);
 
