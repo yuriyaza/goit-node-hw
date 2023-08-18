@@ -21,10 +21,10 @@ async function serverConnect() {
   await databaseConnect();
   app
     .listen(PORT, () => {
-      console.log(colors.bgGreen(`Server is running on port: ${PORT}`));
+      console.log(colors.bgGreen(`Server is running on port: ${PORT}\n`));
     })
     .on('error', error => {
-      console.log(colors.bgRed(`Server connection error, ${error.message}`));
+      console.log(colors.bgRed(`Server connection error, ${error.message}\n`));
     });
 }
 
