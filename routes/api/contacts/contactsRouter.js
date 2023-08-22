@@ -1,5 +1,4 @@
 const express = require('express');
-
 const contactsRouter = express.Router();
 
 const mdwr = require('../../../middleware/contacts');
