@@ -4,7 +4,7 @@ function validateID(request, response, next) {
   const { id } = request.params;
 
   if (!isValidObjectId(id)) {
-    response.status(400).json({ status: 400, message: 'Invalid ID' });
+    response.status(400).json({ message: 'Invalid ID' });
     return;
   }
 
