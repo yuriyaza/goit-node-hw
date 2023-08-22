@@ -6,7 +6,7 @@ async function postContact(request, response, next) {
 
   const result = await Contacts.create(body);
 
-  response.status(201).json({ status: 201, data: result });
+  response.status(201).json({ data: result });
 }
 
 module.exports = exceptionHandler(postContact);

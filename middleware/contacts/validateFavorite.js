@@ -8,7 +8,7 @@ function validateFavorite(request, response, next) {
     errorMessage = errorMessage.replaceAll('"', '');
     errorMessage = errorMessage[0].toUpperCase() + errorMessage.slice(1);
 
-    response.status(400).json({ status: 400, message: errorMessage });
+    response.status(400).json({ message: errorMessage });
     return;
   }
   next();

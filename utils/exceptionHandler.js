@@ -5,7 +5,7 @@ function exceptionHandler(controller) {
       await controller(request, response, next);
     }
     catch (error) {
-      response.status(500).json({ status: 500, message: error.message });
+      response.status(500).json({ message: error.message });
     }
   };
 
