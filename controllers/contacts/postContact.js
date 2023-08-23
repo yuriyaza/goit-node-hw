@@ -3,9 +3,9 @@ const { exceptionHandler } = require('../../utils');
 
 async function postContact(request, response, next) {
     const body = request.body;
-    const result = await Contacts.create(body);
+    const newContact = await Contacts.create(body);
 
-    response.status(201).json({ data: result });
+    response.status(201).json({ data: newContact });
 }
 
 module.exports = exceptionHandler(postContact);

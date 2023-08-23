@@ -9,7 +9,7 @@ async function databaseConnect() {
     try {
         mongoose.set('strictQuery', true);
         const database = await mongoose.connect(DB_HOST);
-        console.log(`\nDatabase connection successful: ${database.connection.name}`);
+        console.log(`\nDatabase connected successful: ${database.connection.name}`);
     }
     catch (error) {
         console.log(colors.bgRed(`\nDatabase connection error, ${error.message}`));
@@ -17,13 +17,14 @@ async function databaseConnect() {
     }
 }
 
-async function serverConnect() {
+async function serverStart() {
     await databaseConnect();
+
     app.listen(PORT, () => {
-        console.log(colors.bgGreen(`Server is running on port: ${PORT}\n`));
+        console.log(colors.bgGreen(`Server started on port: ${PORT}\n`));
     }).on('error', error => {
         console.log(colors.bgRed(`Server connection error, ${error.message}\n`));
     });
 }
 
-serverConnect();
+serverStart(); 
