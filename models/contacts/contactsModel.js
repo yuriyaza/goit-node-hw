@@ -1,28 +1,28 @@
 const { Schema, model } = require('mongoose');
 
 const contactsDBSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: [true, 'Set name for contact'],
+    {
+        name: {
+            type: String,
+            required: [true, 'Set name for contact'],
+        },
+        email: {
+            type: String,
+        },
+        phone: {
+            type: String,
+        },
+        favorite: {
+            type: Boolean,
+            default: false,
+        },
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'user',
+        },
     },
-    email: {
-      type: String,
-    },
-    phone: {
-      type: String,
-    },
-    favorite: {
-      type: Boolean,
-      default: false,
-    },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: 'user',
-    },
-  },
 
-  { versionKey: false, timestamps: true }
+    { versionKey: false, timestamps: true }
 );
 
 const Contacts = model('contacts', contactsDBSchema);

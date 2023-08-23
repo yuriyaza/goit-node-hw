@@ -17,13 +17,13 @@ app.use('/api/users', authRouter);
 app.use('/api/contacts', contactsRouter);
 
 app.use((request, response, next) => {
-  response.status(404).json({ message: 'Not found' });
+    response.status(404).json({ message: 'Not found' });
 });
 
 app.use((err, req, res, next) => {
-  const errorCode = err.code || 500;
-  const errorMessage = err.message || 'Internal server error';
-  res.status(errorCode).json({ message: errorMessage });
+    const errorCode = err.code || 500;
+    const errorMessage = err.message || 'Internal server error';
+    res.status(errorCode).json({ message: errorMessage });
 });
 
 module.exports = app;
