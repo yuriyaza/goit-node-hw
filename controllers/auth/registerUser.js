@@ -12,18 +12,18 @@ async function registerUser(req, res, next) {
 
     const isEmailExist = await Users.findOne({ email });
     if (isEmailExist) {
-        res.status(409).json({ message: 'User with this email already exist' });
+        res.status(409).json({ message: 'User already exist' });
         return;
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await Users.create({ ...req.body, password: passwordHash });
+    const newUser = await Users.create({ ...req.body, password: passwordHash });
 
-    const payload = { id: user._id };
+    const payload = { id: newUser._id };
     const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '24h' });
 
     res.status(201).json({
-        user: { email: user.email, subscription: user.subscription, token },
+        user: { email: newUser.email, subscription: newUser.subscription, token },
     });
 }
 
