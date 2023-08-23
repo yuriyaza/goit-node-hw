@@ -1,14 +1,14 @@
 const { isValidObjectId } = require('mongoose');
 
 function validateID(request, response, next) {
-  const { id } = request.params;
+    const { id } = request.params;
 
-  if (!isValidObjectId(id)) {
-    response.status(400).json({ message: 'Invalid ID' });
-    return;
-  }
+    if (!isValidObjectId(id)) {
+        response.status(400).json({ message: 'Invalid ID' });
+        return;
+    }
 
-  next();
+    next();
 }
 
 module.exports = validateID;

@@ -3,7 +3,7 @@ const validateBody = require('./validateBody');
 const validateFavorite = require('./validateFavorite');
 
 module.exports = {
-  validateID,
-  validateBody,
-  validateFavorite,
+    validateID,
+    validateBody,
+    validateFavorite,
 };

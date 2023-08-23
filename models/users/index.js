@@ -1,5 +1,5 @@
-const Users = require('./usersModel')
+const Users = require('./usersModel');
 
 module.exports = {
-  Users,
-}
+    Users,
+};

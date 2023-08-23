@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { exceptionHandler } = require('../../utils');
 
 const { Users } = require('../../models/users');
 
@@ -14,14 +13,17 @@ async function authenticate(req, res, next) {
         }
 
         const [prefix, token] = authorization.split(' ');
-        console.log(prefix);
         if (prefix !== 'Bearer') {
             throw new Error();
         }
 
         const payload = jwt.verify(token, TOKEN_KEY);
-        const user = await Users.findById(payload.id);
-        if (!user) {
+        // if verification fault - automatically generate an
+        // exception and go to catch
+
+        const { id } = payload;
+        const user = await Users.findById(id);
+        if (!user || !user.token) {
             throw new Error();
         }
 
@@ -33,4 +35,4 @@ async function authenticate(req, res, next) {
     }
 }
 
-module.exports = exceptionHandler(authenticate);
+module.exports = authenticate;

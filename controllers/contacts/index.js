@@ -6,10 +6,10 @@ const patchContact = require('./patchContact');
 const deleteContact = require('./deleteContact');
 
 module.exports = {
-  getContacts,
-  getOneContact,
-  postContact,
-  putContact,
-  patchContact,
-  deleteContact,
+    getContacts,
+    getOneContact,
+    postContact,
+    putContact,
+    patchContact,
+    deleteContact,
 };
