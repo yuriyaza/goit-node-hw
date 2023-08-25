@@ -1,16 +1,15 @@
 const { Contacts } = require('../../models/contacts');
-const { exceptionHandler } = require('../../utils');
+const { asyncHandler, throwHttpError } = require('../../utils');
 
-async function getOneContact(request, response, next) {
+const getOneContact = asyncHandler(async (request, response) => {
     const { id } = request.params;
 
-    const foundContact = await Contacts.findById(id);
-    if (!foundContact) {
-        response.status(404).json({ message: 'Not found' });
-        return;
+    const contact = await Contacts.findById(id);
+    if (!contact) {
+        throwHttpError(404, 'Not found');
     }
 
-    response.status(200).json({ data: foundContact });
-}
+    response.status(200).json({ data: contact });
+});
 
-module.exports = exceptionHandler(getOneContact);
+module.exports = { getOneContact };

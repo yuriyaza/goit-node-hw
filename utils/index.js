@@ -1,5 +1,7 @@
-const exceptionHandler = require('./exceptionHandler');
+const { asyncHandler } = require('./asyncHandler');
+const { throwHttpError } = require('./throwHttpError');
 
 module.exports = {
-    exceptionHandler,
+    asyncHandler,
+    throwHttpError,
 };
