@@ -20,6 +20,7 @@ const registerUser = asyncHandler(async (request, response) => {
 
     const payload = { id: newUser._id };
     const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '24h' });
+    await Users.findByIdAndUpdate(newUser._id, { token });
 
     response.status(201).json({
         user: { email: newUser.email, subscription: newUser.subscription },
