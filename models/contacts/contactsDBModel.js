@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const contactsDBSchema = new Schema(
+const contactsDBSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -17,7 +17,7 @@ const contactsDBSchema = new Schema(
             default: false,
         },
         owner: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'user',
         },
     },
@@ -25,6 +25,6 @@ const contactsDBSchema = new Schema(
     { versionKey: false, timestamps: true }
 );
 
-const Contacts = model('contacts', contactsDBSchema);
+const Contacts = mongoose.model('contacts', contactsDBSchema);
 
-module.exports = Contacts;
+module.exports = { Contacts };

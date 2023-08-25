@@ -1,11 +1,11 @@
 const { Contacts } = require('../../models/contacts');
 const { asyncHandler, throwHttpError } = require('../../utils');
 
-const putContact = asyncHandler(async (request, response) => {
+const patchFavorite = asyncHandler(async (request, response) => {
     const { id } = request.params;
-    const body = request.body;
+    const { favorite } = request.body;
 
-    const updatedContact = await Contacts.findByIdAndUpdate(id, body, { new: true });
+    const updatedContact = await Contacts.findByIdAndUpdate(id, { favorite }, { new: true });
     if (!updatedContact) {
         throwHttpError(404, 'Not found');
     }
@@ -13,4 +13,4 @@ const putContact = asyncHandler(async (request, response) => {
     response.status(200).json({ data: updatedContact });
 });
 
-module.exports = { putContact };
+module.exports = { patchFavorite };
