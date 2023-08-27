@@ -8,7 +8,7 @@ const { usersRoute } = require('../routes/api');
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 app.use(logger(app.get('env') === 'development' ? 'dev' : 'short'));

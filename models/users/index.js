@@ -1,5 +1,5 @@
 const { Users } = require('./usersDBModel')
-const { usersBodySchema } = require('./usersValidationSchema');
+const { usersBodySchema } = require('./usersValidationSchemas');
 
 module.exports = {
     Users,
