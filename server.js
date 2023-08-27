@@ -7,4 +7,3 @@ app.listen(port, () => {
   console.log(colors.bgGreen('\nServer running...'));
   console.log(`Use API on port: ${port}`);
 });
- 
