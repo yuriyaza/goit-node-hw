@@ -1,6 +1,6 @@
 const { Contacts } = require('./contactsDBModel');
-const { contactsBodySchema } = require('./contactsValidationSchema');
-const { contactsFavoriteSchema } = require('./contactsValidationSchema');
+const { contactsBodySchema } = require('./contactsValidationSchemas');
+const { contactsFavoriteSchema } = require('./contactsValidationSchemas');
 
 module.exports = {
     Contacts,
