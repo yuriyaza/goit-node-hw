@@ -13,13 +13,13 @@ const authentication = asyncHandler(async function (request, response, next) {
     }
 
     const [prefix, token] = authHeader.split(' ', 2);
-    if (prefix !== 'Bearer') {
+    if (prefix !== 'Bearer' || !token) {
         throwHttpError(401, 'Unauthorized');
     }
 
     const payload = jwt.verify(token, TOKEN_KEY, (error, data) => {
         if (error) {
-            throwHttpError(401, `Token error: ${error.message}`);
+            throwHttpError(401, 'Invalid token');
         }
         return data;
     });
