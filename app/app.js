@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(logger(app.get('env') === 'development' ? 'dev' : 'short'));
 
+app.use(express.static('public'));
+
 app.use('/api/contacts', contactsRoute);
 app.use('/api/users', usersRoute);
 

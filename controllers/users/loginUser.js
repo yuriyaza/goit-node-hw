@@ -22,10 +22,13 @@ const loginUser = asyncHandler(async (request, response) => {
 
     const payload = { id: user._id };
     const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '24h' });
-    await Users.findByIdAndUpdate(user._id, { token });
+    const loggedUser = await Users.findByIdAndUpdate(user._id, { token });
 
     response.status(201).json({
-        user: { email: user.email, subscription: user.subscription },
+        user: {
+            email: loggedUser.email,
+            subscription: loggedUser.subscription,
+        },
         token,
     });
 });

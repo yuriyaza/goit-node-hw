@@ -25,5 +25,11 @@ usersRoute.get(
     middleware.authentication,
     controller.getCurrentUser
 );
+usersRoute.patch(
+    '/avatar',
+    middleware.authentication,
+    middleware.uploadFiles.single('avatar'),
+    controller.updateAvatar
+);
 
 module.exports = { usersRoute };
