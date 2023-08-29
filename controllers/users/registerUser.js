@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
 
 const { Users } = require('../../models/users');
 const { asyncHandler, throwHttpError } = require('../../utils');
@@ -16,14 +17,19 @@ const registerUser = asyncHandler(async (request, response) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const newUser = await Users.create({ ...request.body, password: passwordHash });
+    const avatarURL = gravatar.url(email);
+    const newUser = await Users.create({ ...request.body, password: passwordHash, avatarURL });
 
     const payload = { id: newUser._id };
     const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '24h' });
     await Users.findByIdAndUpdate(newUser._id, { token });
 
     response.status(201).json({
-        user: { email: newUser.email, subscription: newUser.subscription },
+        user: {
+            email: newUser.email,
+            subscription: newUser.subscription,
+            avatarURL: newUser.avatarURL,
+        },
         token,
     });
 });
