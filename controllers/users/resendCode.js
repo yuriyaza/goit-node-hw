@@ -14,7 +14,7 @@ const resendCode = asyncHandler(async (request, response) => {
         throwHttpError (400, 'Email already verified')
     }
 
-    sendVerificationEmail(user.email, user.verificationCode);
+    await sendVerificationEmail(user.email, user.verificationCode);
 
     response.status(200).json({ message: 'Verification email sent' });
 });
