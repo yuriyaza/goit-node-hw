@@ -1,5 +1,5 @@
 {
-  "printWidth": 120,
+  "printWidth": 160,
   "tabWidth": 4,
   "singleQuote": true,
   "jsxSingleQuote": true,
@@ -17,7 +17,7 @@
     {
       "files": ["./routes/api/*.js"],
       "options": {
-        "printWidth": 75
+        "printWidth": 65
       }
     }
   ]
