@@ -5,7 +5,7 @@ function validateID(request, response, next) {
     const { id } = request.params;
 
     if (!isValidObjectId(id)) {
-        throwHttpError(400, 'ID is incorrect');
+        throwHttpError(400, 'Incorrect ID');
     }
 
     next();

@@ -4,7 +4,7 @@ const colors = require('colors');
 const { app } = require('./app');
 
 require('dotenv').config();
-const { DB_HOST, SERVER_PORT } = process.env;
+const { DB_HOST } = process.env;
 
 async function databaseConnect() {
     try {
@@ -20,8 +20,8 @@ async function databaseConnect() {
 async function serverStart() {
     await databaseConnect();
 
-    app.listen(SERVER_PORT, () => {
-        console.log(colors.bgGreen(`Server started on port: ${SERVER_PORT}\n`));
+    app.listen(3000, () => {
+        console.log(colors.bgGreen('Server started on port: 3000\n'));
     }).on('error', error => {
         console.log(colors.bgRed(`Server connection error, ${error.message}\n`));
     });

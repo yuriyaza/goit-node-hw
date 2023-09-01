@@ -12,12 +12,17 @@ const loginUser = asyncHandler(async (request, response) => {
 
     const user = await Users.findOne({ email });
     if (!user) {
-        throwHttpError(401, 'Email or password is incorrect');
+        throwHttpError(401, 'Incorrect email or password');
     }
 
     const validatePassword = await bcrypt.compare(password, user.password);
     if (!validatePassword) {
-        throwHttpError(401, 'Email or password is incorrect');
+        throwHttpError(401, 'Incorrect email or password');
+    }
+
+    const isEmailVerified = user.verifiedStatus;
+    if (!isEmailVerified) {
+        throwHttpError(401, 'Email is not verified');
     }
 
     const payload = { id: user._id };

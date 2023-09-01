@@ -9,7 +9,7 @@ const usersDBSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            required: [true, 'Set password for user'],
+            required: [true, 'Password is required'],
         },
         subscription: {
             type: String,
@@ -18,6 +18,14 @@ const usersDBSchema = new mongoose.Schema(
         },
         avatarURL: {
             type: String,
+        },
+        verifiedStatus: {
+            type: Boolean,
+            default: false,
+        },
+        verificationCode: {
+            type: String,
+            required: [true, 'Verification code is required'],
         },
         token: {
             type: String,

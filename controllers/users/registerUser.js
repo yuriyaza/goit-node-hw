@@ -1,12 +1,9 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const gravatar = require('gravatar');
+const { nanoid } = require('nanoid');
 
 const { Users } = require('../../models/users');
-const { asyncHandler, throwHttpError } = require('../../utils');
-
-require('dotenv').config();
-const { TOKEN_KEY } = process.env;
+const { asyncHandler, throwHttpError, sendVerificationEmail } = require('../../utils');
 
 const registerUser = asyncHandler(async (request, response) => {
     const { email, password } = request.body;
@@ -17,12 +14,11 @@ const registerUser = asyncHandler(async (request, response) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
+    const verificationCode = nanoid();
     const avatarURL = gravatar.url(email);
-    const newUser = await Users.create({ ...request.body, password: passwordHash, avatarURL });
 
-    const payload = { id: newUser._id };
-    const token = jwt.sign(payload, TOKEN_KEY, { expiresIn: '24h' });
-    await Users.findByIdAndUpdate(newUser._id, { token });
+    const newUser = await Users.create({ ...request.body, avatarURL, password: passwordHash, verificationCode });
+    await sendVerificationEmail(newUser.email, newUser.verificationCode);
 
     response.status(201).json({
         user: {
@@ -30,7 +26,6 @@ const registerUser = asyncHandler(async (request, response) => {
             subscription: newUser.subscription,
             avatarURL: newUser.avatarURL,
         },
-        token,
     });
 });
 
