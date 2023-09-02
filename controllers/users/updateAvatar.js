@@ -1,6 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
-const jimp = require('jimp');
+const sharp = require('sharp');
 
 const { Users } = require('../../models/users');
 const { asyncHandler } = require('../../utils');
@@ -11,19 +11,16 @@ const updateAvatar = asyncHandler(async (request, response) => {
 
     const tempFile = path.join(__dirname, '..', '..', 'temp', filename);
     const destFile = path.join(__dirname, '..', '..', 'public', 'avatars', filename);
-    
-    const avatarImage = await jimp.read(tempFile);
-    avatarImage.resize(250, 250);
-    avatarImage.write(tempFile);
-    
-    await fs.rename(tempFile, destFile);
-
     const avatarURL = path.join('/', 'avatars', filename);
-    const updatedUser = await Users.findByIdAndUpdate(_id, { avatarURL });
+
+    await sharp(tempFile).resize(250, 250, 'contain').toFile(destFile);
+    await fs.unlink(tempFile);
+
+    const updatedUser = await Users.findByIdAndUpdate(_id, { avatarURL }, { returnDocument: 'after' });
 
     response.status(200).json({
         user: {
-            avatarURL: updatedUser.avatarURL,
+            avatarURL: updatedUser.avatarURL
         },
     });
 });

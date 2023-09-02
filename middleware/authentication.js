@@ -19,7 +19,7 @@ const authentication = asyncHandler(async function (request, response, next) {
 
     const payload = jwt.verify(token, TOKEN_KEY, (error, data) => {
         if (error) {
-            throwHttpError(401, 'Invalid token');
+            throwHttpError(401, 'Invalid or expired token');
         }
         return data;
     });

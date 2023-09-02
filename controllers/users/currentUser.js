@@ -1,10 +1,14 @@
 const { asyncHandler } = require('../../utils');
 
 const currentUser = asyncHandler(async (request, response) => {
-    const { email, subscription } = request.user;
+    const { email, subscription, avatarURL } = request.user;
 
     response.status(200).json({
-        user: { email, subscription },
+        user: {
+            email,
+            subscription,
+            avatarURL,
+        },
     });
 });
 

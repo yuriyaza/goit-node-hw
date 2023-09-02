@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const gravatar = require('gravatar');
+const path = require('node:path');
 const { nanoid } = require('nanoid');
 
 const { Users } = require('../../models/users');
@@ -13,11 +13,11 @@ const registerUser = asyncHandler(async (request, response) => {
         throwHttpError(409, 'User already exist');
     }
 
-    const passwordHash = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const verificationCode = nanoid();
-    const avatarURL = gravatar.url(email);
+    const defaultAvatar = path.join(__dirname, '..', '..', 'public', 'avatars', 'default.png');
 
-    const newUser = await Users.create({ ...request.body, avatarURL, password: passwordHash, verificationCode });
+    const newUser = await Users.create({ ...request.body, avatarURL: defaultAvatar, password: hashedPassword, verificationCode });
     await sendVerificationEmail(newUser.email, newUser.verificationCode);
 
     response.status(201).json({

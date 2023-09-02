@@ -4,13 +4,15 @@ const { Users } = require('../../models/users');
 const verifyUser = asyncHandler(async (request, response) => {
     const { code } = request.params;
 
-    const verifiedUser = await Users.findOneAndUpdate({ verificationCode: code }, { verifiedStatus: true, verificationCode: null });
+    const verifiedUser = await Users.findOneAndUpdate({ verificationCode: code }, { verifiedStatus: true });
 
     if (!verifiedUser) {
-        throwHttpError(404, 'Not found');
+        throwHttpError(401, 'Invalid verification code');
     }
 
-    response.status(200).json({ message: 'Email verified successfully' });
+    response.status(200).json({
+        message: 'Email verified successfully',
+    });
 });
 
 module.exports = { verifyUser };

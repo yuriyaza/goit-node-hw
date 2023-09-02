@@ -9,7 +9,11 @@ const getAllContacts = asyncHandler(async (request, response) => {
     const filteredContacts = await Contacts.find(filter).skip(skip).limit(limit);
     const totalContacts = await Contacts.find(filter).count();
 
-    response.status(200).json({ data: filteredContacts, quantity: filteredContacts.length, total: totalContacts });
+    response.status(200).json({
+        data: filteredContacts,
+        quantity: filteredContacts.length,
+        total: totalContacts,
+    });
 });
 
 module.exports = { getAllContacts };
