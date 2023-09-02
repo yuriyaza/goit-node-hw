@@ -1,5 +1,5 @@
 const { asyncHandler, throwHttpError } = require('../../utils');
-const { Users } = require('../../models/users');
+const { Users } = require('../../models/auth');
 
 const verifyUser = asyncHandler(async (request, response) => {
     const { code } = request.params;

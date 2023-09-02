@@ -2,7 +2,7 @@ const path = require('node:path');
 const fs = require('node:fs/promises');
 const sharp = require('sharp');
 
-const { Users } = require('../../models/users');
+const { Users } = require('../../models/auth');
 const { asyncHandler } = require('../../utils');
 
 const updateAvatar = asyncHandler(async (request, response) => {

@@ -1,4 +1,4 @@
-const { Users } = require('../../models/users');
+const { Users } = require('../../models/auth');
 const { asyncHandler, throwHttpError, sendVerificationEmail } = require('../../utils');
 
 const resendCode = asyncHandler(async (request, response) => {
@@ -6,7 +6,7 @@ const resendCode = asyncHandler(async (request, response) => {
 
     const user = await Users.findOne({ email });
     if (!user) {
-        throwHttpError(401, 'Incorrect email');
+        throwHttpError(400, 'Email not found');
     }
 
     const isVerified = user.verifiedStatus;

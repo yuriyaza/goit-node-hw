@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const contactsBodySchema = Joi.object({
+const contactsAllSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string(),
     phone: Joi.string(),
@@ -12,6 +12,6 @@ const contactsFavoriteSchema = Joi.object({
 });
 
 module.exports = {
-    contactsBodySchema,
+    contactsAllSchema,
     contactsFavoriteSchema,
 };

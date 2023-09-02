@@ -1,46 +1,46 @@
 const express = require('express');
-const contactsRoute = express.Router();
+const contactsRoutes = express.Router();
 
 const middleware = require('../../middleware');
 const schema = require('../../models/contacts');
 const controller = require('../../controllers/contacts');
 
-contactsRoute.get(
+contactsRoutes.get(
     '/',
     middleware.authentication,
     controller.getAllContacts
 );
-contactsRoute.get(
+contactsRoutes.get(
     '/:id',
     middleware.authentication,
     middleware.validateID,
     controller.getOneContact
 );
-contactsRoute.post(
+contactsRoutes.post(
     '/',
     middleware.authentication,
-    middleware.validateRequest(schema.contactsBodySchema),
+    middleware.validateRequest(schema.contactsAllSchema),
     controller.postContact
 );
-contactsRoute.put(
+contactsRoutes.put(
     '/:id',
     middleware.authentication,
     middleware.validateID,
-    middleware.validateRequest(schema.contactsBodySchema),
+    middleware.validateRequest(schema.contactsAllSchema),
     controller.putContact
 );
-contactsRoute.patch(
+contactsRoutes.patch(
     '/:id/favorite',
     middleware.authentication,
     middleware.validateID,
     middleware.validateRequest(schema.contactsFavoriteSchema),
     controller.patchFavorite
 );
-contactsRoute.delete(
+contactsRoutes.delete(
     '/:id',
     middleware.authentication,
     middleware.validateID,
     controller.deleteContact
 );
 
-module.exports = { contactsRoute };
+module.exports = { contactsRoutes };
