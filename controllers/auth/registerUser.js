@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const path = require('node:path');
 const { nanoid } = require('nanoid');
 
-const { Users } = require('../../models/users');
+const { Users } = require('../../models/auth');
 const { asyncHandler, throwHttpError, sendVerificationEmail } = require('../../utils');
 
 const registerUser = asyncHandler(async (request, response) => {

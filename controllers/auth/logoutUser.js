@@ -1,4 +1,4 @@
-const { Users } = require('../../models/users');
+const { Users } = require('../../models/auth');
 const { asyncHandler } = require('../../utils');
 
 const logoutUser = asyncHandler(async (request, response) => {

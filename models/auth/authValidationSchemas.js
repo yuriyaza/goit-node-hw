@@ -1,15 +1,15 @@
 const Joi = require('joi');
 
-const usersBodySchema = Joi.object({
+const authAllSchema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().required(),
 });
 
-const usersEmailSchema = Joi.object({
+const authEmailSchema = Joi.object({
     email: Joi.string().required(),
 });
 
 module.exports = {
-    usersBodySchema,
-    usersEmailSchema,
+    authAllSchema,
+    authEmailSchema,
 };

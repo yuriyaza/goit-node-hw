@@ -1,44 +1,44 @@
 const express = require('express');
-const usersRoute = express.Router();
+const authRoutes = express.Router();
 
 const middleware = require('../../middleware');
-const schema = require('../../models/users');
-const controller = require('../../controllers/users');
+const schema = require('../../models/auth');
+const controller = require('../../controllers/auth');
 
-usersRoute.get(
+authRoutes.get(
     '/current',
     middleware.authentication,
     controller.currentUser
 );
-usersRoute.post(
+authRoutes.post(
     '/register',
-    middleware.validateRequest(schema.usersBodySchema),
+    middleware.validateRequest(schema.authAllSchema),
     controller.registerUser
 );
-usersRoute.post(
+authRoutes.post(
     '/login',
-    middleware.validateRequest(schema.usersBodySchema),
+    middleware.validateRequest(schema.authAllSchema),
     controller.loginUser
 );
-usersRoute.post(
+authRoutes.post(
     '/logout',
     middleware.authentication,
     controller.logoutUser
 );
-usersRoute.get(
+authRoutes.get(
     '/verify/:code',
     controller.verifyUser
 );
-usersRoute.post(
+authRoutes.post(
     '/verify',
-    middleware.validateRequest(schema.usersEmailSchema),
+    middleware.validateRequest(schema.authEmailSchema),
     controller.resendCode
 );
-usersRoute.patch(
+authRoutes.patch(
     '/avatar',
     middleware.authentication,
     middleware.uploadFiles.single('avatar'),
     controller.updateAvatar
 );
 
-module.exports = { usersRoute };
+module.exports = { authRoutes };

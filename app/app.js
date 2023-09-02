@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
 
-const { contactsRoute } = require('../routes/api');
-const { usersRoute } = require('../routes/api');
+const { authRoutes } = require('../routes/api');
+const { contactsRoutes } = require('../routes/api');
 
 const app = express();
 
@@ -15,8 +15,8 @@ app.use(logger(app.get('env') === 'development' ? 'dev' : 'short'));
 
 app.use(express.static('public'));
 
-app.use('/api/contacts', contactsRoute);
-app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoutes);
+app.use('/api/contacts', contactsRoutes);
 
 app.use((request, response, next) => {
     response.status(404).json({ message: 'Not found' });
