@@ -9,7 +9,9 @@ const getOneContact = asyncHandler(async (request, response) => {
         throwHttpError(404, 'Not found');
     }
 
-    response.status(200).json({ data: foundContact });
+    response.status(200).json({
+        data: foundContact,
+    });
 });
 
 module.exports = { getOneContact };

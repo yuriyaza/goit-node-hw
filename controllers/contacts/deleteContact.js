@@ -9,7 +9,9 @@ const deleteContact = asyncHandler(async (request, response) => {
         throwHttpError(404, 'Not found');
     }
 
-    response.status(200).json({ data: deletedContact });
+    response.status(200).json({
+        data: deletedContact,
+    });
 });
 
 module.exports = { deleteContact };

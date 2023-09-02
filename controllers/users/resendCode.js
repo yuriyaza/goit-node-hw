@@ -11,12 +11,14 @@ const resendCode = asyncHandler(async (request, response) => {
 
     const isVerified = user.verifiedStatus;
     if (isVerified) {
-        throwHttpError (400, 'Email already verified')
+        throwHttpError(400, 'Email already verified');
     }
 
     await sendVerificationEmail(user.email, user.verificationCode);
 
-    response.status(200).json({ message: 'Verification email sent' });
+    response.status(200).json({
+        message: 'Verification email sent',
+    });
 });
 
 module.exports = { resendCode };
